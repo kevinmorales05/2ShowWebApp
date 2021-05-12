@@ -1,5 +1,185 @@
 @import '~antd/dist/antd.css';
 
-.menu{
+.textBig{
+    font-size: 45px;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+
+}
+.textBig2{
+    font-size: 40px;
+    font-weight: bolder;
+    color: #6C141B;
+    text-align: center;
+    margin: 15px;
+}
+.textMedium{
+    font-size: 30px;
+    font-weight: bolder;
+    color: rgb(46, 54, 76);
+    text-align: center;
+    margin: 15px;
+}
+.textSmall{
+    font-size: 14px;
+    color: black;
+    text-align: justify;
+    margin: 10px;
   
+}
+.slider{
+    
+    background-color: #6C141B;
+
+}
+.header{
+    background-color: #6C141B;
+    height:fit-content;
+    background-attachment: fixed;
+    
+}
+.menu2{
+    text-align: center;
+    margin-top: 0;
+    color: white;
+}
+.content{
+    text-align: center; 
+    margin:20px;
+}
+.footer{
+    text-align: center;
+    background-color: #6C141B;
+}
+
+/*Banners*/
+.banner1 {
+    background: #fff;
+    background-image: url('./assets/images/bg/concert.png');
+    background-size:cover;
+    height: 300px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+  }
+  .banner2 {
+    background: #fff;
+    background-image: url('./assets/images/bg/sports.png') ;
+    background-size:cover;
+    height: 300px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+  }
+  .banner3 {
+    background: #fff;
+    background-image: url('./assets/images/bg/culture.png');
+    background-size:contain;
+    display: flex;
+    height: 300px;
+    margin-top: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+  }
+  .banner4 {
+    background: #fff;
+    background-image: url("./assets/images/bg/teatrum.png");
+    background-size:cover;
+    height: 300px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+  }
+  .banner{
+      padding: 120px 0;
+  }
+  /*Items de breadcrum*/
+  .item{
+      background-color: white;
+      padding: 4px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+  }
+  .item:hover{
+      background-color: rgb(46, 54, 76);
+     
+      border: white solid 1px;
+  }
+  .link{
+      color: #6C141B !important;
+      font-weight: bold;
+      
+  }
+  .link:hover{
+    color: white !important;
+  }
+
+  .logo{
+    align-content: center;
+    position: relative;
+    bottom: 10px;
+    right: 5px;
+    
+  }
+  
+/*banner del carrousel*/
+.tituloBanner{
+    font-size: 35px;
+    font-weight: bolder;
+    color: white; 
+    text-shadow: 2px 2px black;
+}
+/*boton personalizado*/
+.btn2Show{
+    background-color: #6C141B; 
+    border-radius: 10px;
+    border-color: rgb(46, 54, 76); 
+    color:white;
+
+}
+.btn2Show:hover{
+    background-color: rgb(46, 54, 76);
+    border-color: #6C141B ;
+    color:white !important;
+}
+
+/*Bloque 2Show*/
+.block2Show{
+    width: 300px;
+    margin: 0 auto;
+}
+.columna2Show{
+    background-color: lightgray;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+    border-color: black;
+    align-content: center;
+    margin: 5px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Bloque Cards*/
+.bloqueCards{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.card{
+    margin: 10px;
 }
