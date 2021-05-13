@@ -1,0 +1,66 @@
+.blockEvento{
+    display: block;
+    height:fit-content;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/show-5b0a0.appspot.com/o/hanny-naibaho-aWXVxy8BSzc-unsplash.jpg?alt=media&token=5a9211aa-4637-428d-bf11-d146e4955e21');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px;
+    align-items: center;
+
+    
+}
+
+.blockEvento h1 {
+    color: white;
+    margin-top: 150px;
+}
+.btnIngresar {
+    align-self: center;
+    margin-top: 40px;
+    opacity: 90%;
+    background-color: black;
+    color: white;
+    font-size: medium;
+    height: fit-content;
+}
+.btnIngresar:hover {
+    color: black;
+    background-color: white;
+}
+
+.videoBlock {
+    display: flex;
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    
+
+}
+.videoBlock iframe{
+    display: flex;
+    align-content: center;
+    margin-top:10px;
+    
+
+}
+.btnBar {
+    margin-top: 10px;
+    
+   
+}
+.btnBar:hover {
+    opacity: 100%;
+}
+
+.btnEvent{
+    border: white;
+    background-color: black;
+    color: white;
+}
+.btnEvent:hover{
+    border: black;
+    background-color: white;
+    color: black;
+    margin: 10px;
+}

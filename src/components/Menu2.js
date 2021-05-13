@@ -35,6 +35,11 @@ export default function Menu2() {
             My Profile
           </Link>
         </Breadcrumb.Item>
+        <Breadcrumb.Item className="item">
+          <Link to="/myevents" className="link">
+            My Events
+          </Link>
+        </Breadcrumb.Item>
 
         <Breadcrumb.Item className="item">
           <Link to="/shows" className="link">

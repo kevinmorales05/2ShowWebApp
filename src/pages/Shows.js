@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card,  Button, Modal } from "antd";
+import { Card, Button, Modal } from "antd";
 import { db, auth } from "../firebase";
 import {} from "@ant-design/icons";
 import BuyEvent from "../components/BuyEvent";
+import changeUrlToEmbedUrl from "../utils/functions";
 
 export default function Shows() {
   const { Meta } = Card;
@@ -38,7 +39,13 @@ export default function Shows() {
   };
 
   const handleOk = () => {
-    setIsModalVisible(false);
+    setConfirmLoading(true);
+    setTimeout(() => {
+      createBuy();
+      setIsModalVisible(false);
+      setConfirmLoading(false);
+    }, 2000);
+    alert("Compra realizada con éxito!");
   };
 
   const handleCancel = () => {
@@ -46,28 +53,52 @@ export default function Shows() {
   };
 
   //states para pasar al modal
-  const [nameBuy, setNameBuy] = useState('')
-  const [costBuy, setCostBuy] = useState(0)
-  const [descripBuy, setDescripBuy] = useState('')
-  const [bannerBuy, setBannerBuy] = useState('')
-  const [ticketBuy, setTicketBuy] = useState('')
-  const [keyBuy, setKeyBuy] = useState('')
-  const [uidUser, setUidUser] = useState('')
+  const [nameBuy, setNameBuy] = useState("");
+  const [costBuy, setCostBuy] = useState(0);
+  const [descripBuy, setDescripBuy] = useState("");
+  const [bannerBuy, setBannerBuy] = useState("");
+  const [ticketBuy, setTicketBuy] = useState("");
+  const [urlEvent, setUrlEvent] = useState("");
+  const [keyBuy, setKeyBuy] = useState("");
+  const [uidUser, setUidUser] = useState("");
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
   //funcion para pasar los props
   const openModalWithInfo = (event) => {
-        setNameBuy(event.data.name)
-        setCostBuy(event.data.costTicket)
-        setDescripBuy(event.data.description)
-        setTicketBuy(event.data.ticketsAvailable)
-        setBannerBuy(event.data.banner)
+    setNameBuy(event.data.name);
+    setCostBuy(event.data.costTicket);
+    setDescripBuy(event.data.description);
+    setTicketBuy(event.data.ticketsAvailable);
+    setBannerBuy(event.data.banner);
+    setUrlEvent(changeUrlToEmbedUrl(event.data.urlEvent));
+  };
+
+  //funcion para realizar la compra
+  const createBuy = async () => {
+    //const user = await auth.currentUser();
+    try {
+      // writeEventData(values, user.uid);
+      writeBuy();
+    } catch (error) {
+      console.log("No fue posible registrar su compra en la base de datos");
+    }
+  };
+
+  function writeBuy() {
+    db.ref("buyTickets/cflaXdwVR3MpndWXJhTH0UclO632").push({
+      name: nameBuy,
+      description: descripBuy,
+      banner: bannerBuy,
+      costTicket: ticketBuy,
+      urlEvent: urlEvent,
+    });
+    console.log("upload complete!", nameBuy);
   }
 
   return (
     <div>
-      
-
       <h1 className="textBig2">Shows disponibles</h1>
-     
+
       <div className="showsBlock">
         {data.map((event, key) => {
           return (
@@ -75,9 +106,9 @@ export default function Shows() {
               <Card
                 hoverable
                 style={{ width: 240 }}
-                cover={<img alt="example" height="280px" src={event.data.banner} 
-                
-                />}
+                cover={
+                  <img alt="example" height="280px" src={event.data.banner} />
+                }
                 key={event.key}
               >
                 <Meta title={event.data.name} description={event.description} />
@@ -85,28 +116,48 @@ export default function Shows() {
                 <p>{event.data.description}</p>
 
                 <p>Fecha Evento: {event.data.dateEvent}</p>
-                <Button type="primary" onClick={()=>{showModal()
-                    openModalWithInfo(event)
-                }} className="btn2Show">
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    showModal();
+                    openModalWithInfo(event);
+                  }}
+                  className="btn2Show"
+                >
                   Comprar Evento
                 </Button>
-                
               </Card>
               <Modal
-                  title={nameBuy}
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                  key={key}
-                >
-                  <BuyEvent name={nameBuy}
-                      cost={costBuy}
-                      description={descripBuy}
-                      banner={bannerBuy}
-                      ticketsAvailable={ticketBuy}
-                      key={keyBuy}
-                      buyerUid={uidUser} />
-                </Modal>
+                title={nameBuy}
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                key={key}
+                confirmLoading={confirmLoading}
+                footer={[
+                  <Button key="back" onClick={handleCancel}>
+                    Cancelar
+                  </Button>,
+                  <Button
+                    key="submit"
+                    type="primary"
+                    loading={confirmLoading}
+                    onClick={handleOk}
+                  >
+                    Comprar
+                  </Button>,
+                ]}
+              >
+                <BuyEvent
+                  name={nameBuy}
+                  cost={costBuy}
+                  description={descripBuy}
+                  banner={bannerBuy}
+                  ticketsAvailable={ticketBuy}
+                  key={keyBuy}
+                  buyerUid={uidUser}
+                />
+              </Modal>
             </div>
           );
         })}

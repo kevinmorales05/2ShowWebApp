@@ -5,6 +5,7 @@ import Shows from "../pages/Shows";
 import Main from "../pages/Main";
 import SingIn from "../pages/SingIn";
 import FAQ from "../pages/FAQ";
+import MyEvents from '../pages/MyEvents'
 
 function Routes() {
   return (
@@ -20,6 +21,9 @@ function Routes() {
       </Route>
       <Route path="/faq">
         <FAQ />
+      </Route>
+      <Route path="/myevents">
+        <MyEvents />
       </Route>
       <Route path="/">
         <Main />

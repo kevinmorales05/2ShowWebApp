@@ -225,5 +225,54 @@ Shows block
     align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
    
 }
+
+/*
+my Events block
+*/
+.myeventsBlock{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.broadcastBlock{
+    width: 70%;
+    margin-right: 10px;
+}
+.myShows{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: #6C141B solid;
+    padding: 5px;
+    height: fit-content;
+    border-radius: 10px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 5px;
+}
+.rowShows{
+    display: flex;
+    flex-direction: column;
+}
+/*List block*/
+.listBanner{
+    margin-right: 10px;
+    
+}
+.listInfo{
+    text-align: center;
+}
+.listTitle{
+    font-weight: bolder;   
+    color: rgb(46, 54, 76);
+}
+.listDetail{
+
+}
+
