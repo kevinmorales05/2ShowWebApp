@@ -9,11 +9,10 @@ import {
   AutoComplete,
   InputNumber,
   DatePicker,
-  Upload,
 } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import FileUploader from "react-firebase-file-uploader";
 import SingIn from "./SingIn";
-import { auth, db } from "../firebase";
+import { auth, db, storage } from "../firebase";
 import { useHistory } from "react-router-dom";
 
 const { Option } = Select;
@@ -147,7 +146,7 @@ export default function Register() {
     db.ref("users/" + userID).set({
       name: values.name,
       email: values.email,
-      // photo : values.photo,
+      photo : urlImagen,
       phoneNumber: values.phone,
       website: values.website,
       //city: values.city,
@@ -198,6 +197,40 @@ export default function Register() {
   };
 
   let history = useHistory();
+
+
+//Funciones para manejar las funciones
+const handleUploadStart = () => {
+    setProgreso(0)
+    setSubiendo(true)
+  
+  }
+  const handleUploadError = (error) => {
+    setSubiendo(false)
+    console.log(error)
+  }
+  const handleUploadSuccess = async (nombre) => {
+    setProgreso(100)
+    setSubiendo(false)
+    //almacenar la url de destino
+    const url = await storage.ref("photoUsers")
+    .child(nombre)
+    .getDownloadURL();
+    console.log(url)
+    setUrlImagen(url)
+  
+  }
+  
+  const handleProgress = (progreso) => {
+    setProgreso(progreso)
+    console.log(progreso)
+  }
+
+  //states para las imagenes
+const [subiendo, setSubiendo] = useState(false)
+const [progreso, setProgreso] = useState(0)
+const [urlImagen, setUrlImagen] = useState('')
+
 
   return (
     <div>
@@ -316,12 +349,37 @@ export default function Register() {
               label="Subir Foto de Perfil"
               valuePropName="fileList"
               getValueFromEvent={normFile}
-              extra="Suba la foto que más le guste"
+             
             >
-              <Upload name="logo" action="/upload.do" listType="picture">
-                <Button icon={<UploadOutlined />}>Click para subir</Button>
-              </Upload>
+              <FileUploader
+                  accept="image/*"
+                  id="imagen"
+                  name="imagen"
+                  randomizeFilename
+                  storageRef={storage.ref("photoUsers")}
+                  onUploadStart={handleUploadStart}
+                  onUploadError={handleUploadError}
+                  onUploadSuccess={handleUploadSuccess}
+                  onProgress ={handleProgress}
+
+              />
+              {subiendo && (
+                <div className="barra">
+                  <div className="avance" style={{width: `${progreso}%`}}>
+                    {progreso} %
+                    </div>
+                </div>
+              )
+              }
+              {
+                urlImagen && (
+                  <p className="successText">
+                    La imagen se subió correctamente
+                  </p>
+                )
+              }
             </Form.Item>
+            
 
             <Form.Item
               name="city"

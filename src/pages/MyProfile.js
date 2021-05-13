@@ -31,7 +31,7 @@ export default function Profile() {
       <div className="background">
         <Image
           width={200}
-          src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+          src={userInfo.photo}
           className="imgProfile"
         />
       </div>
@@ -85,7 +85,7 @@ export default function Profile() {
           onOk={() => setMyshows(false)}
           onCancel={() => setMyshows(false)}
         >
-          <MyShows />
+          <MyShows uidUser={userInfo.uid} />
         </Modal>
         <Modal
           title="Crear Shows"
@@ -93,7 +93,7 @@ export default function Profile() {
           onOk={() => setCreateEvent(false)}
           onCancel={() => setCreateEvent(false)}
         >
-          <CreateShow />
+          <CreateShow uidUser={userInfo.uid} />
         </Modal>
       </div>
       <div></div>

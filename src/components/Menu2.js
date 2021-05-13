@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
 import { CaretRightFilled } from "@ant-design/icons";
+import { db, auth, storage } from '../firebase';
 
 export default function Menu2() {
+  const [singIn, setSingIn] = useState(false)
   return (
     <div >
       <Breadcrumb
@@ -11,9 +13,17 @@ export default function Menu2() {
         separator={<CaretRightFilled style={{ color: "white", paddingBottom:'30px' }} />}
       >
         <Breadcrumb.Item className="item">
-          <Link to="/singin" className="link">
+          {singIn ? (
+             
+              <button onClick={()=> alert('Cerrar Sesión')}  className="link">
+              Sing Out
+              </button>
+          ) :(
+            <Link to="/singin" className="link">
             Sing In
-          </Link>
+            </Link>
+          )}
+          
         </Breadcrumb.Item>
         <Breadcrumb.Item className="item">
           <Link to="/" className="link">

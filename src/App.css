@@ -183,3 +183,47 @@
 .card{
     margin: 10px;
 }
+
+/* Barra de carga de imagen
+h-12 relative w-full border
+bg-green-500 absolute left-0 top-0 text-white px-2 text-sm h-12 flex items-center
+*/
+.barra{
+    height: 12px;
+    width: fit-content;
+    border-color: black;
+}
+.avance{
+    background-color: rgb(46, 54, 76) ;
+    position: absolute;
+    left: 0px;
+    top:40px;
+    color:white;
+    font-size: small;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+.successText{
+    color:#6C141B;
+    font-weight: bolder;
+}
+/*
+Shows block
+*/
+.showsBlock{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.showCard{
+    margin: 5px;
+}
+.buyEventBlock{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+   
+}

@@ -18,7 +18,7 @@ export default function SingIn() {
         let user = userCredential.user;
         console.log("Impresion de usuario",user.uid);
         console.log("Impresion de email",user.email);
-        history.push('/profile');
+        history.push('/myprofile');
         alert('Bienvenido a 2Show!');
       })
       .catch((error) => {
