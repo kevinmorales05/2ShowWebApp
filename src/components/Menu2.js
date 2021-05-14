@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import FirebaseContext from '../context/firebaseContext'
 import { Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
 import { CaretRightFilled } from "@ant-design/icons";
 import { db, auth, storage } from "../firebase";
 import { SingleBedOutlined } from "@material-ui/icons";
 
+
 export default function Menu2() {
-  const [singIn, setSingIn] = useState(false);
+
+  const {singIn, setSingIn, setSingOut} = useContext(FirebaseContext);
+
+  useEffect(() => {
+    console.log(singIn, 'desde Context')
+  }, [singIn])
 
   const closeSession = () => {
     if (auth.currentUser) {
       console.log(auth.currentUser.uid);
       auth.signOut();
       alert("Cesión Finalizada!");
-      setSingIn(false);
+      setSingOut();
     } else {
       alert("No se ha iniciado sesión");
     }

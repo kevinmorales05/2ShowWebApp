@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import FirebaseContext from '../context/firebaseContext'
 import { Form, Input, Checkbox, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import Register from './Register';
@@ -6,6 +7,7 @@ import {auth} from '../firebase';
 
 export default function SingIn() {
   const [register, setRegister] = useState(false);
+  let {singIn, setSingIn} = useContext(FirebaseContext);
   
   let history = useHistory();
 
@@ -18,6 +20,7 @@ export default function SingIn() {
         let user = userCredential.user;
         console.log("Impresion de usuario",user.uid);
         console.log("Impresion de email",user.email);
+        setSingIn()
         history.push('/myprofile');
         alert('Bienvenido a 2Show!');
       })
