@@ -85,14 +85,22 @@ export default function Shows() {
   };
 
   function writeBuy() {
-    db.ref("buyTickets/cflaXdwVR3MpndWXJhTH0UclO632").push({
-      name: nameBuy,
-      description: descripBuy,
-      banner: bannerBuy,
-      costTicket: ticketBuy,
-      urlEvent: urlEvent,
-    });
-    console.log("upload complete!", nameBuy);
+
+    if (auth.currentUser) {
+      console.log(auth.currentUser.uid)
+      db.ref(`buyTickets/${auth.currentUser.uid}`).push({
+        name: nameBuy,
+        description: descripBuy,
+        banner: bannerBuy,
+        costTicket: ticketBuy,
+        urlEvent: urlEvent,
+      });
+      console.log("upload complete!", nameBuy);
+      
+    } else {
+      alert("No hay un usuario loggeado!");
+    }
+    
   }
 
   return (

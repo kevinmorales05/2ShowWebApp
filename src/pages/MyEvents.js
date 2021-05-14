@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OnLiveShow from "../components/OnLiveShow";
-import { db } from "../firebase";
+import { db, auth } from "../firebase";
 import { Button, Image } from "antd";
 
 export default function MyEvents() {
@@ -9,17 +9,30 @@ export default function MyEvents() {
   const [nameEvent, setNameEvent] = useState("");
 
   useEffect(() => {
+
     const getEvents = async () => {
-      const eventsRef = db.ref("buyTickets/cflaXdwVR3MpndWXJhTH0UclO632");
-      eventsRef.once("value", function (snapshot) {
-        var eventsList = [];
-        snapshot.forEach(function (childSnapshot) {
-          var key = childSnapshot.key;
-          var data = childSnapshot.val();
-          eventsList.push({ key: key, data });
+
+
+      if (auth.currentUser) {
+        console.log(auth.currentUser.uid) 
+      
+        const eventsRef = db.ref(`buyTickets/${auth.currentUser.uid}`);
+        eventsRef.once("value", function (snapshot) {
+          var eventsList = [];
+          snapshot.forEach(function (childSnapshot) {
+            var key = childSnapshot.key;
+            var data = childSnapshot.val();
+            eventsList.push({ key: key, data });
+          });
+          setData(eventsList);
         });
-        setData(eventsList);
-      });
+      }
+        
+        else {
+          alert('No existe un usuario loggeado!')
+        }
+
+      
     };
 
     getEvents();
