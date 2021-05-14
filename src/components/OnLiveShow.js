@@ -2,7 +2,7 @@ import { Button, Modal } from "antd";
 import React, { useState } from "react";
 import "../assets/css/OnLiveShow.css";
 
-export default function OnLiveShow({ urlOnPlay }) {
+export default function OnLiveShow({ urlOnPlay, nameEvent }) {
   const [enterEvent, setEnterEvent] = useState(false);
 
   //funciones para manejar modal de donacion
@@ -87,11 +87,12 @@ export default function OnLiveShow({ urlOnPlay }) {
             </div>
           ) : (
             <div style={{ height: 600 }}>
-              <h1>Bienvenido al Evento</h1>
+              <h1 className="tituloBanner">Bienvenido al Evento</h1>
+              <h2 className="tituloBanner">{nameEvent}</h2>
               <Button
                 type="dashed"
                 onClick={(event) => setEnterEvent(true)}
-                className="btnIngresar"
+                className="btn2Show"
               >
                 Ingresar Evento
               </Button>
