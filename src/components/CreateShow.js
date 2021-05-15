@@ -6,12 +6,17 @@ import {
   Button,
   InputNumber,
   DatePicker,
+  TimePicker
 } from "antd";
 import { auth, db, storage } from "../firebase";
 import { useHistory } from "react-router-dom";
 import FileUploader from "react-firebase-file-uploader";
 import Modal from "antd/lib/modal/Modal";
 import VistaPrevia from "./VistaPrevia";
+//para trabajar con el tiempo
+import moment from 'moment';
+
+
 
 const formItemLayout = {
   labelCol: {
@@ -76,7 +81,8 @@ export default function CreateShow({uidUser}) {
       banner : urlImagen,
       costTicket: values.costTicket,
       ticketsAvailable: values.ticketsAvailable,
-      //dateEvent: values.dateEvent,
+      dateEvent: dateEvent,
+      hourEvent: hourEvent,
       dateCreation:  Date.now(),
       urlEvent: values.urlEvent,
       uid: uidUser,
@@ -127,6 +133,10 @@ const [nameEvent, setNameEvent] = useState('')
 const [descripEvent, setDescripEvent] = useState('')
 const [costEvent, setCostEvent] = useState('')
 const [ticketDisp, setTicketDisp] = useState(0)
+//fecha del evento
+const [dateEvent, setDateEvent] = useState('')
+//hora del evento
+const [hourEvent, setHourEvent] = useState('')
 
 const [isModalVisible, setIsModalVisible] = useState(false);
 const showModal = () => {
@@ -140,6 +150,20 @@ const handleOk = () => {
 const handleCancel = () => {
   setIsModalVisible(false);
 };
+
+//funciones para la fecha
+function onChangeDate(date, dateString) {
+ 
+  setDateEvent(moment(date).format('LL'))
+
+
+
+}
+//funcion para la hora
+function onChangeHour(time, timeString) {
+ 
+  setHourEvent(timeString)
+}
 
   return (
     <div>
@@ -213,16 +237,40 @@ const handleCancel = () => {
         </Form.Item>
 
         <Form.Item
+          name="eventDate"
           label="Fecha del Evento"
-          name="dateEvent"
+          tooltip="Escoja la fecha de realizacion del evento"
           rules={[
             {
+              
               required: true,
+             
             },
           ]}
         >
-          <DatePicker />
+          <DatePicker onChange={onChangeDate} />
+          
         </Form.Item>
+
+        <Form.Item
+          name="eventHour"
+          label="Hora del Evento"
+          tooltip="Escoja la hora de realizacion del evento"
+          rules={[
+            {
+              
+              required: true,
+             
+            },
+          ]}
+        >
+          <TimePicker use12Hours format="HH:mm" onChange={onChangeHour} defaultOpenValue={moment('00:00', 'HH:mm')} />
+          
+        </Form.Item>
+
+        
+       
+
 
         <Form.Item
           name="banner"

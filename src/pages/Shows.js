@@ -123,7 +123,10 @@ export default function Shows() {
                 <p>Costo Ticket: {event.data.costTicket} USD</p>
                 <p>{event.data.description}</p>
 
-                <p>Fecha Evento: {event.data.dateEvent}</p>
+                <p>Fecha del Evento: {event.data.dateEvent}</p>
+                <p>Hora del  Evento: {event.data.hourEvent}</p>
+
+
                 <Button
                   type="primary"
                   onClick={() => {
