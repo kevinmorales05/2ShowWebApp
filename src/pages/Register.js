@@ -14,6 +14,7 @@ import FileUploader from "react-firebase-file-uploader";
 import SingIn from "./SingIn";
 import { auth, db, storage } from "../firebase";
 import { useHistory } from "react-router-dom";
+import moment from 'moment';
 
 const { Option } = Select;
 const residences = [
@@ -149,8 +150,8 @@ export default function Register() {
       photo : urlImagen,
       phoneNumber: values.phone,
       website: values.website,
-      //city: values.city,
-      //birthday: values.birthday,
+      city: values.city,
+      birthday: dateEvent,
       age: values.age,
       uid: userID,
     });
@@ -230,6 +231,17 @@ const handleUploadStart = () => {
 const [subiendo, setSubiendo] = useState(false)
 const [progreso, setProgreso] = useState(0)
 const [urlImagen, setUrlImagen] = useState('')
+
+//funciones para la fecha
+const [dateEvent, setDateEvent] = useState('')
+
+function onChangeDate(date, dateString) {
+ 
+  setDateEvent(moment(date).format('LL'))
+
+
+
+}
 
 
   return (
@@ -341,7 +353,7 @@ const [urlImagen, setUrlImagen] = useState('')
                 },
               ]}
             >
-              <DatePicker />
+               <DatePicker onChange={onChangeDate} />
             </Form.Item>
 
             <Form.Item

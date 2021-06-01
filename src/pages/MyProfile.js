@@ -41,13 +41,13 @@ export default function Profile() {
           <Col>
             <Card style={{ width: 300 }}>
               <p>
-                <b>Ciudad:</b> Guayaquil-Ecuador
+                <b>Ciudad:</b>{userInfo.city[2]}
               </p>
               <p>
                 <b>Edad:</b> {userInfo.age} años
               </p>
               <p>
-                <b>Fecha de Cumpleaños:</b> 06-nov-1993
+                <b>Fecha de Cumpleaños:</b> {userInfo.birthday}
               </p>
               <p>
                 <b>Teléfono:</b> {userInfo.phoneNumber}

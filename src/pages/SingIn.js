@@ -4,6 +4,7 @@ import { Form, Input, Checkbox, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import Register from './Register';
 import {auth} from '../firebase';
+import 'firebase/auth';
 
 export default function SingIn() {
   const [register, setRegister] = useState(false);
@@ -19,6 +20,7 @@ export default function SingIn() {
         
         let user = userCredential.user;
         console.log("Impresion de usuario",user.uid);
+        console.log("Impresion de password",password);
         console.log("Impresion de email",user.email);
         setSingIn()
         history.push('/myprofile');
@@ -27,10 +29,15 @@ export default function SingIn() {
       .catch((error) => {
         
         alert('Datos erroneos');
-        history.push('/singin');
+        history.push('/');
       });
     
   }
+
+//funcion mejorada
+
+
+
 
   
   const layout = {
